@@ -13,20 +13,21 @@ require './lib/play_game.rb'
 
 quit = false
 win = false
-until quit || win
+until quit
   @printer.main_menu  # (p)lay, (i)nstructions, (q)uit?
   option_select = gets.chomp.downcase.strip
   if option_select == 'p' || option_select == 'play'
-    result = @game.game_flow
-    if result == "quitter"
+    results = @game.game_flow
+    if results[:result_key] == "quitter"
       @printer.quit
       quit = true
-    elsif result == "cheater"
+    elsif results[:result_key] == "cheater"
       @printer.cheat
       quit = true
-    elsif result == "winner"
-      @printer.win
+    elsif results[:result_key] == "winner"
+      @printer.win(results[:answer_key].upcase, results[:number_of_guess])
       win = true
+
     end
   elsif option_select == 'i' || option_select == 'instructions'
     @printer.instructions

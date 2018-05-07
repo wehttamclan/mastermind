@@ -1,5 +1,5 @@
 class Printer
-
+attr_reader :colors
 
   def initialize
     @colors = ["(r)ed", "(g)reen", "(b)lue", "(y)ellow", "(p)urple", "(o)range"]
@@ -11,7 +11,7 @@ class Printer
   end
 
   def invalid_option
-    puts "\nPlease select one of the given options.\n"
+    puts "\nPlease select one of the given options.\n\n"
   end
 
   def difficulty_selection_prompt
@@ -46,8 +46,9 @@ class Printer
     puts "\nThanks for playing!  Goodbye for now."
   end
 
-  def win
-    puts "\nGood guess! Goodbye for now."
+  def win(answer, number_of_guesses)
+    puts "Congratulations!"
+    puts "You guessed the sequence #{answer} in #{number_of_guesses} guesses."
   end
 
   def quit

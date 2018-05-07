@@ -46,16 +46,24 @@ class PlayGame
 
   def game_flow
     d = choose_difficulty
+    results = {}
     if d == 'q' || d == 'quit'
       result = "quitter"
+      results[:result_key] = result
+      results[:number_of_guess] = 0
     else
       @printer.start_prompt(d) # Make your guess.
       answer = @answer_gen.generator(d)
+      results[:answer_key] = answer
       puts "(#{answer})"
+      count = 0
       until result == "quitter" || result == "winner" || result == "cheater"
         result = play(d, answer)
+        count += 1
+        results[:result_key] = result
+        results[:number_of_guess] = count
       end
     end
-    return result
+    return results
   end
 end

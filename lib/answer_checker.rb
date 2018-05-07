@@ -21,7 +21,7 @@ class AnswerCheck
       @printer.too_long
       @printer.guess_again
     else
-      @printer.guess_again # print accuracy method instead
+      @printer.guess_again(correct_positions, correct_elements) # print accuracy method instead
     end
   end
 
@@ -34,6 +34,7 @@ class AnswerCheck
         correct_positions += 1
       end
     }
+    return correct_positions
   end
 
   def correct_elements(guess, answer)
@@ -45,7 +46,12 @@ class AnswerCheck
       answer_color_count[color] = answer.count(color)
       guess_color_count[color] = guess.count(color)
     end
-    guess.length.times do |num|
-      answer_color_count
+    answer_color_count.keys.each do |key|
+      if answer_color_count[key] <= guess_color_count[key]
+        correct_element_count += answer_color_count[key]
+      elsif answer_color_count[key] > guess_color_count[key]
+        correct_element_count += guess_color_count[key]
+      end
+    return correct_element_count
   end
 end

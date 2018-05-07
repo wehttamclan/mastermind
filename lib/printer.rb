@@ -38,8 +38,9 @@ attr_reader :colors
     puts "\nYour answer is too long."
   end
 
-  def guess_again
-    puts "\nGuess again."
+  def guess_again(correct_positions, correct_elements)
+    puts "\nYour guess has #{correct_elements} of the correct elements."
+    puts "with #{correct_positions} in the correct positionsYou've taken 1 guess."
   end
 
   def cheat
